@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Dinosaur</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/x-icon" href="kombatdle_icon1.png">
+</head>
+
+<body>
+    <div class="site-container">
+        <div class="header">
+            <div class="title-container"> 
+
+            </div>
+
+            <h1>Daily Dinosaur</h1>
+            
+            <div id="button-box">
+                <button id="streak" class="menubutton tooltip2 expand"
+                    data-title="Your current daily win streak">Streak: 0</button>
+                    <button id="patch-notes" class="menubutton tooltip2 expand"
+                    data-title="List of dinosaurs included in the game">List of dinosaurs</button>
+                    <button id="guide" class="menubutton tooltip2 expand" data-title="How to play the game">How to play</button>
+                    
+            </div>
+            
+            <h2 id="caption">Guess the dinosaur of the day!</h2>
+            <div id="victory">
+                <h2 style="padding: 0; margin: 0;">Well done!</h2>
+            </div>
+            <h2 id="checkmark" style="text-shadow: none; margin: 5px;">✅</h2>
+        </div>
+        <div id="countdown_header" class="countdown_section">Next dinosaur available in:</div>
+
+            <div id="countdown1" class="countdown_section"></div>
+        <div class="search-container">
+
+            <input type="text" id="searchinput" placeholder="Insert dinosaur name" oninput="showSuggestions()">
+            <button id="button" onclick="guess()">Guess</button>
+            <div id="suggestions"></div>
+        </div>
+
+        <!--  dinosaur template: {Name: "", Trait: "long-necked, ", Diet: "", Weight: "", Length: "", Area: "", Age: ""} -->
+
+        <div id="rows">
+            <div id="cards">
+                <div id="character" class="card">Dinosaur</div>
+                <div id="gender" class="card tooltip expand" data-title="Trait of dinosaur (horned, predator, long-necked etc.)" style="z-index: 10;">Trait </div>
+                <div id="race" class="card tooltip expand" data-title="Herbivore, Carnivore" style="z-index: 10;">Diet</div>
+                <div id="faction" class="card tooltip expand"
+                    data-title="Weight of dinosaur in kg" style="z-index: 10;">Weight</div>
+                <div id="realm" class="card tooltip expand" data-title="Length of dinosaur"
+                    style="z-index: 10;">Length</div>
+                <div id="color" class="card tooltip expand" data-title="Area the dinosaur lived in"
+                    style="z-index: 10;">Area</div>
+                <div id="debut" class="card tooltip expand" data-title="Triassic, Jurassic, Cretaceous"
+                    style="z-index: 10;">Age</div>
+
+            </div>
+
+            <div id="answer-container" class="answer-container"></div>
+
+
+            <section id="victory-section" class="section">
+                <!-- <span class="overlay"></span>-->
+                <div id="overlay" onclick="off()"></div>
+                <div class="modal-box">
+                    <i class="fa-regular fa-circle-check"></i>
+                    <h2 id="flawless-victory"></h2>
+                    <h2>Well done!</h2>
+                    <h3>You have sucessfully completed the game</h3>
+                    <h3 id="guess-count">Well done!</h3>
+                    <h2 style="text-shadow: none; margin: 5px;">✅</h2>
+                    <h3>Next dinosaur available in:</h3>
+                    <div id="countdown"></div>
+                    <div class="buttons">
+                        <button class="close-btn">Continue</button>
+                    </div>
+                    <h3 id="characterOfTheDay">Character of the day: </h3>
+                </div>
+
+
+            </section>
+
+            <section id="guide-section" class="section">
+                <div id="overlay" onclick="off()"></div>
+                <div class="modal-box left_text long">
+                    <i class="fa-regular fa-circle-check"></i>
+                    <h2 id="flawless-victory"></h2>
+                    <h2>Guide</h2>
+                    <h3 class="bigger_text">How to play Daily Dinosaur</h3>
+                    <h3 style="text-align: center;"> The game is all about guessing the dinosaur of the Day based on a series of clues.<br><br> Each time you make a guess, colored squares will appear next to different trait categories.<br><br> These squares represent how closely your guessed dinosaur matches the traits of the correct dinosaur.<br><br> - A green square means your guess shares the exact same trait as the dinosaur of the day.<br> <div class="example_square"></div><br> - An orange square means there are some similarities in that trait, but also one or more differences.<br> <div class="example_square" style="background-color: rgb(255,153,0);"></div><br> - A red square means there are no common traits in that category.<br> <div class="example_square" style="background-color: red;"></div><br><br> Use the information from each guess to narrow down the possibilities and figure out the correct dinosaur.<br><br> Good luck, and enjoy playing! </h3>
+            </section>
+            <!-- 
+      <section id="guide-section" class="section">
+        <div id="overlay1" onclick="off()"></div>
+        <div class="modal-box">
+          <i class="fa-regular fa-circle-check"></i>
+          <h2 id="flawless-victory"></h2>
+          <h2>Guide!</h2>
+          <h3>How to play mortal kombatdle:</h3>
+          <h3>The game is about guessing the selected character of the day. Each time you make a guess by entering a character name, and then entering the guess. On a guess, squares will then appear on the rows with the different categories. The squares describe what the guessed character's features is. Each square will have a color, each with their own unique meaning. A green square means that your character has the same traits as the character of the day. An orange square means that they share a trait, but they also have a trait that they do not share. A red square means that they do not have anything in common in the given category. Each guess will therefore give you more and more info, until you can deduce what character is the character of the day</h3>
+      </section>
+-->
+            <section id="patch-notes-section" class="section">
+                <div id="overlay" onclick="off()"></div>
+                <div class="modal-box">
+                    <i class="fa-regular fa-circle-check"></i>
+                    <h2 id="flawless-victory"></h2>
+                    <h2>Dinosaur list</h2>
+                    
+                    
+                    <h3>Allosaurus</h3>
+                    <h3>Ankylosaurus</h3>
+                    <h3>Brontosaurus</h3>
+                    <h3>Mosasaurus</h3>
+                    <h3>Pterodactyl</h3>
+                    <h3>Spinosaurus</h3>
+                    <h3>Stegosaurus</h3>
+                    <h3>Triceratops</h3>
+                    <h3>Tyrannosaurus rex</h3>
+                    <h3>Velociraptor</h3>
+                    
+                    
+            </section>
+
+            <section id="characters-section" class="section">
+                <div id="overlay" onclick="off()"></div>
+                <div class="modal-box modal-box-scroll">
+                    <i class="fa-regular fa-circle-check"></i>
+                    <h2 id="flawless-victory"></h2>
+                    <h2>Characters</h2>
+                    <h3 class="question">Which characters are in the game?</h3>
+<h3 class="answer">
+    All characters who have appeared in the NetherRealm era are included by default. The reason the character pool is limited to modern-era characters is because many of the 3D era fighters are obscure or niche, which could make the game significantly more difficult for players unfamiliar with the Midway era.<br><br>
+    However, you can start a new game with 3D era characters in the pool by clicking the 3D Mode button. This will begin a new game that includes those characters.
+</h3>
+
+<h3 class="question">What character lore is used?</h3>
+<h3 class="answer">
+    In Mortal Kombat, a character’s traits and story often change from game to game depending on the current narrative. This means characters may acquire new attributes or roles over time.<br><br>
+    To keep things consistent, this game uses the state of each character as they were before the creation of the New Era in Mortal Kombat 11 (2019). For example, Liu Kang is considered both a god and a human, due to the events in Mortal Kombat 11. If a character has had multiple traits due to story progression, they are reflected in this game. For instance, Scorpion starts as a revenant in Mortal Kombat (2011), but by the end of Mortal Kombat X, he is human again — so he is considered both "Human" and "Revenant" in this game.
+</h3>
+
+<h3 class="answer">
+    Retcons are also treated as canon where applicable. So for example, Sindel is considered "Evil" rather than "Good, Unwillingly Evil".
+</h3>
+
+<h3 class="question">What about the characters in Mortal Kombat 1?</h3>
+<h3 class="answer">
+    3D era characters who only appear in the Mortal Kombat 1 (New Era) timeline are not included in the normal mode character pool.
+</h3>
+
+<h3 class="question">I disagree with how a character's canon is established! Is there any way to get it fixed?</h3>
+<h3 class="answer">
+    Feel free to contact me on X at <a style="color: white;"href="https://x.com/Ailu_Dev" target="_blank">Ailu_dev</a> on X or on ailuinteractive<a style="font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">@</a>gmail.com, if you notice any mistakes or have feedback on how certain character traits should be represented. I'm open to revisiting decisions if there's a flaw in the logic.
+</h3>
+                </div>
+            </section>
+
+            <section id="information-section" class="section">
+                <div id="overlay" onclick="off()"></div>
+                <div class="modal-box left_text long">
+                    <i class="fa-regular fa-circle-check"></i>
+                    <h2 id="flawless-victory"></h2>
+                    <h2>Information</h2>
+                    <h3 class="bigger_text"></h3>
+                    <h3 style="text-align: center;">
+                        Made by <a style="color: white;"href="https://x.com/Ailu_Dev" target="_blank">Ailu_dev</a>.
+                        <br><br>Kombatdle is an independent project and is not affiliated with or endorsed by Warner Bros. or NetherRealm Studios.   </h3>
+            </section>
+
+        </div>
+
+
+
+        <h1 id="disclaimer"></h1>
+
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        <script>
+
+
+
+
+
+mk1 = "Mortal Kombat (1992)"
+            mk2 = "Mortal Kombat 2"
+            mk3 = "Mortal Kombat 3"
+            mkt = "Mortal Kombat Trilogy"
+            mkmsz = "Mortal Kombat Mythologies: Sub-Zero"
+            mk4 = "Mortal Kombat 4"
+            mksf = "Mortal Kombat: Special Forces"
+            mkda = "Mortal Kombat: Deadly Alliance"
+            mkd = "Mortal Kombat: Deception"
+            mka = "Mortal Kombat: Armageddon"
+            mk9 = "Mortal Kombat (2011)"
+            mkx = "Mortal Kombat X"
+            mk11 = "Mortal Kombat 11"
+            mkone = "Mortal Kombat 1"
+
+
+            //Tyrannosaurus rex
+
+           // Velociraptor
+
+            //Allosaurus
+
+           // Spinosaurus
+
+            // Brontosaurus
+
+            // Triceratops
+
+            //Ankylosaurus
+
+            // stegosaurus 
+            
+            // 
+
+            /* "Template": {Name: "", Gender: "", Race: "", Faction: "", Realm: "", Alignment: "", Debut: }, */
+            // dinosaur template: {Name: "", Trait: "long-necked, ", Diet: "", Weight: "", Length: "", Area: "", Age: ""}
+
+            // all traits: long-necked, predator, horned, armored, plated
+
+            const characterDatabase = {
+                "ankylosaurus": {Name: "Ankylosaurus", Trait: "Armored", Diet: "Herbivore", Weight: "8.000 kg", Length: "8.0m", Area: "Canada, USA", Age: "Cretaceous"},
+                "velociraptor": {Name: "Velociraptor", Trait: "Predator (Theropod)", Diet: "Carnivore", Weight: "7 kg", Length: "1.8", Area: "Mongolia", Age: "Cretaceous"},
+                "allosaurus": {Name: "Allosaurus", Trait: "Predator (Theropod)", Diet: "Carnivore", Weight: "2.700 kg", Length: "9.7m", Area: "USA", Age: "Jurrasic"},
+                "spinosaurus": {Name: "Spinosaurus", Trait: "Predator (Theropod)", Diet: "Carnivore", Weight: "7400 kg", Length: "14.0m", Area: "Egypt, Morocco", Age: "Cretaceous"},
+                "brontosaurus": {Name: "Brontosaurus", Trait: "Long-necked", Diet: "Herbivore", Weight: "46900m", Length: "22.0m", Area: "USA", Age: "Jurrasic"},
+                "triceratops": {Name: "Triceratops", Trait: "Horned", Diet: "Herbivore", Weight: "10000", Length: "9.0m", Area: "USA", Age: "Cretaceous"},
+                "stegosaurus": {Name: "Stegosaurus", Trait: "Armored", Diet: "Herbivore", Weight: "5000", Length: "9.0m", Area: "USA", Age: "Jurrasic"},
+                "tyranosaurus rex": {Name: "Tyrannosaurus Rex", Trait: "Predator (Theropod)", Diet: "Carnivore", Weight: "7000 kg", Length: "12.0m", Area: "Canada, USA", Age: "Cretaceous"},
+                "pterodactyl": {Name: "Pterodactyl", Trait: "Flying (Pterosauria)", Diet: "Carnivore", Weight: "250", Length: "2", Area: "USA", Age: "Jurrasic, Cretaceous"},
+                "mosasaurus": {Name: "Mosasaurus", Trait: "Aquatic", Diet: "Carnivore", Weight: "10000", Length: "17", Area: "Ocean", Age: "Cretaceous"},
+            }
+            
+
+
+
+            const pictureDatabase = {
+                "ankylosaurus": { picture_url: "Pictures/ankylosaurus.jpg"},
+                "velociraptor": { picture_url: "Pictures/velociraptor1.jpg" },
+                "allosaurus": { picture_url: "Pictures/allosaurus1.avif" },
+                "spinosaurus": { picture_url: "Pictures/spinosaurus1.png" },
+                "brontosaurus": { picture_url: "Pictures/brontosaurus1.webp" },
+                "triceratops": { picture_url: "Pictures/triceratops.webp" },
+                "stegosaurus": { picture_url: "Pictures/stegosaurus.jpg" },
+                "tyranosaurus rex": { picture_url: "Pictures/tyrannosaurus1.jpg" },
+                "pterodactyl": { picture_url: "Pictures/pterodactyl.jpg" },
+                "mosasaurus": { picture_url: "Pictures/mosasaurus1.webp" },
+            }
+
+                console.log(characterDatabase);
+
+            let banned_list = JSON.parse(localStorage.getItem("banned_list")) || []; // Retrieve banned list from local storage or initialize as empty
+
+            let hard_mode = localStorage.getItem("hard_mode") === "true"; // Retrieve and convert to boolean
+
+            if (hard_mode === true) {
+                banned_list = JSON.parse(localStorage.getItem("banned_list3D")) || [];
+            }
+
+            let correct_counter = 0
+
+            let victory = false
+
+            let no_text = false
+
+            let guess_counter = 0
+
+            let selection = -1;
+
+            let flawless_victory = false
+
+            var answer_container = document.getElementById('answer-container');
+
+            let number_key = null;
+
+            let number_key2 = null;
+
+            function guess(character) {
+                let database = null;
+
+                if (hard_mode === false) {
+                    database = characterDatabase
+                } else {
+                    database = hardmode_characterbase
+                }
+
+
+                if (victory === true) {
+                    return;
+                }
+                const suggestionsDiv = document.getElementById('suggestions');
+                suggestionsDiv.style.display = 'none';
+                selection = -1
+                console.log("selection is ", selection)
+                console.log(character)
+                document.getElementById("searchinput").value = character
+                let iteration_count = 0
+
+                let correct_counter = 0
+                guess_counter += 1
+                var raw_input_value = document.getElementById("searchinput").value;
+                document.getElementById("searchinput").value = ""
+                var input_value = raw_input_value.toLowerCase()
+                var container = document.createElement("div")
+                container.className = "square-container"
+                //const characterObject = characterDatabase[input_value];
+
+                const characterObject = database[input_value];
+
+                //let guess = characterDatabase[input_value]
+                let guess = database[input_value]
+                const new_row = document.createElement("div")
+                if (banned_list.includes(input_value)) {
+                    console.log("Error: Guess can't be made due to it already being guessed")
+                } else if (!(input_value in database)) {
+                    console.log("Error: character name is not in database")
+                }
+                else {
+                    answer_container.prepend(container)
+                    banned_list.push(input_value); // Add guessed character to banned list
+                    localStorage.setItem("banned_list", JSON.stringify(banned_list)); // Save updated banned list to local storage
+                    // Start of loop
+                    for (let key in guess) {
+                        iteration_count += 1
+                        const square = document.createElement('div');
+                        square.style.backgroundImage = "none"
+                        if (iteration_count === 1) {
+                            // Behavior for first iteration aka. the square that needs pictures and hover elements
+                            if (pictureDatabase[input_value] === undefined) {
+                                console.log("ERROR: Missing image on guess")
+                                console.log("The data type of the image path is: ", pictureDatabase[input_value])
+                            } else {
+                                square.style.backgroundImage = `url("${pictureDatabase[input_value].picture_url}")`;
+                            }
+                            //square.style.backgroundImage = `url(icons/${guess.Image})`;
+                            square.style.backgroundSize = "cover"; // or "cover" depending on the effect you want
+                            square.style.backgroundRepeat = "no-repeat"; // Prevents tiling
+                            square.style.backgroundPosition = "center"; // Centers the image
+                            square.classList.add('square');
+                            square.classList.add("picturesquare")
+                            square.style.backgroundColor = "rgb(0, 209, 17)";
+                            correct_counter += 1;
+                            const textSpan = document.createElement("span"); // Create a span element
+                            textSpan.textContent = guess[key];
+                            textSpan.classList.add("namehover")
+                            square.appendChild(textSpan);
+                            container.appendChild(square);
+                        } else {
+                            //console.log(guess[key])
+                            delete square.style.backgroundImage;
+                            if (guess[key] == answer_data[key]) {
+                                //  const square = document.createElement('div');
+                                square.classList.add('square');
+                                square.style.backgroundColor = "rgb(0, 209, 17)";
+                                correct_counter += 1;
+                                //const textNode = document.createTextNode(guess[key]);
+                                // square.appendChild(textNode);
+                                //container.appendChild(square);
+                                const textSpan = document.createElement("span"); // Create a span element
+                                textSpan.textContent = guess[key];
+                                textSpan.classList.add("squaretext")
+                                square.appendChild(textSpan);
+                                let number_key_value = guess[key]
+                                    let numbericstring = number_key_value.toString().replace(/[^\d.]/g, "")
+                                    if (!isNaN(numbericstring) && numbericstring.length > 0) {
+                                        guess[key] = parseInt(numbericstring, 10); // or parseFloat if you prefer decimals
+                                        console.log(guess[key])
+                                    }
+                                /*    
+                                if (guess[key].split(" ").some(word => word.length > 9)) {
+                                    textSpan.style.fontSize = "17px";
+                                } */
+
+                                container.appendChild(square);
+                            } else {
+                                const guessParts = guess[key].split(",").map(part => part.trim());
+                                const answerParts = answer_data[key].split(",").map(part => part.trim());
+                                const partialMatch = guessParts.some(part => answerParts.includes(part));
+
+                                if (partialMatch) {
+                                    // Partial match
+                                    // const square = document.createElement('div');
+                                    square.classList.add('square');
+                                    square.style.backgroundColor = "rgb(255, 153, 0)";
+                                    //const textNode = document.createTextNode(guess[key]);
+                                    //square.appendChild(textNode);
+                                    // container.appendChild(square);
+                                    const textSpan = document.createElement("span"); // Create a span element
+                                    textSpan.textContent = guess[key];
+                                    textSpan.classList.add("squaretext")
+                                    let number_key_value = guess[key]
+                                    let numbericstring = number_key_value.toString().replace(/[^\d.]/g, "")
+                                    if (!isNaN(numbericstring) && numbericstring.length > 0) {
+                                        guess[key] = parseInt(numbericstring, 10); // or parseFloat if you prefer decimals
+                                        console.log(guess[key])
+                                    }
+
+                                    square.appendChild(textSpan);
+                                    container.appendChild(square);
+
+                        /* 
+                            for (const key in characterDatabase) {
+                                const dino = characterDatabase[key];
+
+                                for (const prop in dino) {
+                                    let value = dino[prop];
+
+                                    // Remove units and whitespace
+                                    let numericString = value.toString().replace(/[^\d.]/g, "");
+
+                                    // If it looks like a number, convert it
+                                    if (!isNaN(numericString) && numericString.length > 0) {
+                                    dino[prop] = parseInt(numericString, 10); // or parseFloat if you prefer decimals
+                                    console.log(dino[prop])
+                                    }
+                                }
+                                }   */
+
+                                } else {
+    // Completely incorrect guess
+    square.classList.add('square');
+    square.style.backgroundColor = "red";
+    
+    // Process numeric values for comparison
+    let number_key = parseFloat(guess[key].toString().replace(/[^\d.]/g, ""));
+    let number_key2 = parseFloat(answer_data[key].toString().replace(/[^\d.]/g, ""));
+
+    // First ensure no background image is present
+    square.style.backgroundImage = "none";
+    
+    // Only add arrows if we have valid numbers to compare
+    if (!isNaN(number_key) && !isNaN(number_key2)) {
+        if (number_key > number_key2) {
+            square.style.backgroundImage = 'url(Pictures/black_arrow_down.png)';
+        } else if (number_key < number_key2) {
+            square.style.backgroundImage = 'url(Pictures/black_arrow.webp)';
+        }
+    }
+
+    // Set consistent background properties for arrows
+    if (square.style.backgroundImage !== "none") {
+        square.style.backgroundSize = "cover";
+        square.style.backgroundRepeat = "no-repeat";
+        square.style.backgroundPosition = "center";
+    }
+
+    // Add the text
+    const textSpan = document.createElement("span");
+    textSpan.textContent = guess[key];
+    textSpan.classList.add("squaretext");
+    square.appendChild(textSpan);
+    container.appendChild(square);
+}
+
+                            }
+                        }
+
+                    }
+                }
+
+                // console.log(correct_counter)
+                if (correct_counter === 7) {
+
+                    victory = true;
+                    console.log("victory pending...")
+                    correct_counter = 0
+                } else {
+                    correct_counter = 0
+                }
+
+                if (banned_list.includes(input_value)) {
+                    // console.log("The banned list already has the inputted value")
+                }
+                else if (input_value in characterDatabase) {
+                    banned_list.push(input_value)
+                    // console.log(banned_list)
+                }
+                else {
+                    //console.log("Value is not equal to a name in the database")
+                }
+                animatesquares(container)
+                //correct_counter = 0;
+
+                if (guess_counter === 1 & victory === true) {
+                    flawless_victory = true;
+                    console.log("flawless victory!")
+                    let flawless_victory_text = document.getElementById("flawless-victory")
+                    flawless_victory_text.innerHTML = "Perfect!"
+                    document.getElementById("guess-count").innerHTML = `You guessed the dinosaur in a single attempt. Well done!`
+                }
+
+                const stored_squares = Array.from(answer_container.children).map(div => div.outerHTML);
+
+
+                if (hard_mode === false) {
+                    localStorage.setItem('savedDivs', JSON.stringify(stored_squares));
+                } else {
+                    localStorage.setItem("savedDivs3D", JSON.stringify(stored_squares));
+                }
+
+            }
+
+
+
+
+
+            async function animatesquares(container_parameter) {
+                let green_counter = 0
+                const squares = document.querySelectorAll(".square");
+
+                const container_children = container_parameter.children
+
+                //let correct_counter = 0    
+
+                for (const anim_square of container_children) {
+                    // console.log(anim_square);
+                    // Reset animation
+                    anim_square.style.animation = "none";
+                    anim_square.offsetHeight; // Trigger reflow
+
+                    // Apply animation again
+                    anim_square.style.animation = "scale 0.5s forwards";
+                    await new Promise(resolve => {
+                        anim_square.addEventListener("animationend", () => {
+                            resolve()
+                            if (anim_square.style.backgroundColor === "rgb(0, 209, 17)") {
+                                green_counter += 1
+                            }
+                        }, { once: true });
+
+                    });
+                }
+
+                if (green_counter === 7) {
+                    console.log("game won!")
+                    //  alert("You win!")
+                    victory_screen()
+                } else {
+                    correct_counter === 0;
+                }
+
+
+            }
+
+            let answer_data = null;
+            let random_key = null;
+
+            // Function to get today's character
+            function getDailyCharacter() {
+                // localStorage.removeItem("streak_possible")
+                const date = new Date();
+                const dateStr = `${date.getFullYear()}${(date.getMonth() + 1).toString().padStart(2, '0')}${date.getDate().toString().padStart(2, '0')}`;
+                //let keys = Object.keys(characterDatabase); 
+                let keys = null
+                if (hard_mode === false) {
+                    keys = Object.keys(characterDatabase);
+                    console.log("Easy mode activated")
+                    const randomIndex = Math.floor(Math.random() * keys.length);
+                    //const randomIndex = parseInt(dateStr, 10) % keys.length;
+                    
+                    randomKey = keys[randomIndex];
+                    answer_data = characterDatabase[randomKey]
+                } else {
+                    console.log("Hard mode activated")
+                    keys = Object.keys(hardmode_characterbase)
+                    console.log(hardmode_characterbase)
+                    const randomIndex = parseInt(dateStr, 10) % keys.length;
+                    randomKey = keys[randomIndex];
+                    answer_data = hardmode_characterbase[randomKey]
+                }
+
+
+                //Der skal skrives kode her som gør at databaserne bliver opdateret på en passende måde
+
+                //randomKey = keys.find(key => key === "hsu hao");
+
+                //answer_data = characterDatabase[randomKey]
+                console.log("The selected character is:")
+                console.log(randomKey)
+            }
+
+            getDailyCharacter()
+
+            function showSuggestions() {
+                const input = document.getElementById('searchinput').value.toLowerCase();
+                const suggestionsDiv = document.getElementById('suggestions');
+                let keys = null
+                if (hard_mode === false) {
+                    console.log("easy mode!!")
+                    keys = Object.keys(characterDatabase);
+                } else {
+                    keys = Object.keys(hardmode_characterbase);
+                }
+
+                const filteredKeys = keys.filter(key => key.toLowerCase().includes(input));
+                suggestionsDiv.innerHTML = '';
+
+                if (filteredKeys.length > 0 && input !== '') {
+                    suggestionsDiv.style.display = 'block';
+                    filteredKeys.forEach(key => {
+
+                        // console.log(key)
+                        const suggestionDiv = document.createElement('div');
+                        if (banned_list.includes(key)) {
+                            console.log("This suggestion shouldn't be present!")
+                        } else {
+                            suggestionDiv.textContent = key;
+                            suggestionDiv.onclick = function () {
+                                document.getElementById('searchinput').value = key;
+                                guess(key)
+                                suggestionsDiv.style.display = 'none';
+                                selection = -1
+                            };
+                            suggestionsDiv.appendChild(suggestionDiv);
+                        }
+
+                    });
+                } else {
+                    hide_suggestions()
+                }
+            }
+
+            function hide_suggestions() {
+                let suggestionsDiv = document.getElementById('suggestions');
+                selection = -1
+                console.log("Suggestions are now gone")
+            }
+
+            document.addEventListener('click', function (event) {
+                const suggestionsDiv = document.getElementById('suggestions');
+                const inputField = document.getElementById('searchinput');
+            });
+
+            $('.button').click(function () {
+                // console.log("it worked")
+                var buttonId = $(this).attr('id');
+                $('#modal-container').removeAttr('class').addClass(buttonId);
+                $('body').addClass('modal-active');
+            })
+
+            $('#modal-container').click(function () {
+                $(this).addClass('out');
+                $('body').removeClass('modal-active');
+            });
+
+            const section = document.getElementById("victory-section"),
+                overlay = document.querySelector(".overlay"),
+                closeBtn = document.querySelector(".close-btn");
+            closeBtn.addEventListener("click", () => {
+                section.classList.remove("active")
+                document.getElementById("overlay").style.display = "none";
+            }
+            );
+
+            const Today = new Date();
+            Today.setHours(0, 0, 0, 0);
+
+            let pastvictory_string = localStorage.getItem("today");
+
+            if (pastvictory_string) {
+                let pastvictory_data = new Date(pastvictory_string)
+
+                let differenceindays = (Today - pastvictory_data) / (1000 * 60 * 60 * 24)
+
+                console.log("Data found for previous victory on :", pastvictory_string)
+                console.log("difference in days is", differenceindays)
+
+                if (differenceindays > 1) {
+                    console.log("Streak has been reset, due to a day being missed")
+                    Number(localStorage.removeItem("streak"))
+                } else if (differenceindays === 1) {
+                    console.log("Streak can be increased today because a day has passed!");
+                } else {
+                    console.log("Streak can't be increased because you already played", localStorage.getItem("streak"))
+                }
+
+            } else {
+                console.log("No previous date stored")
+            }
+
+            if (localStorage.getItem("today") === null) {
+                localStorage.setItem("today", "");
+            }
+
+            function checkNewDay() {
+                // OVERVEJ AT SLET DET HER, FORDI DER FINDES ALLEREDE EN FUNKTION TIL DET
+                let today = new Date().toDateString(); // Get today's date as a string
+                let lastVisit = localStorage.getItem("lastVisit");
+
+                if (lastVisit !== today) {
+                    console.log("New day detected! Resetting streak_possible.");
+                    localStorage.removeItem("streak_possible"); // Remove only once per day
+                    localStorage.removeItem("savedDivs");
+                    localStorage.removeItem("savedDivs3D")
+                    localStorage.removeItem("banned_list")
+                    localStorage.removeItem("banned_list3D")
+                    localStorage.setItem("lastVisit", today); // Update last visit date
+                    localStorage.removeItem("victory_state")
+                    localStorage.removeItem("victory_state3D")
+                }
+            }
+
+            checkNewDay();
+
+            if (localStorage.getItem("streak") === null) {
+                localStorage.setItem("streak", 0);
+            }
+            console.log("Streak possible is: ", localStorage.getItem("streak_possible"))
+
+            let streak_text = document.getElementById("streak")
+
+            console.log("streak is:", Number(localStorage.getItem("streak")))
+
+            streak_text.innerHTML = `Streak: ${Number(localStorage.getItem("streak"))}`
+
+            let victory_box = document.getElementById("victory")
+
+            let currentday = new Date().toDateString();
+
+            function victory_screen() {
+                if (hard_mode === false) {
+                    localStorage.setItem("victory_state", "true")
+                } else {
+                    localStorage.setItem("victory_state3D", "true")
+                }
+                
+                localStorage.setItem("today", currentday)
+                if (localStorage.getItem("streak_possible") === null) {
+                    console.log("no value, therefore streak should be possible")
+                    let streak = Number(localStorage.getItem("streak"));
+                    streak += 1;
+                    console.log("streak is", streak)
+                    localStorage.setItem("streak", streak);
+                    console.log("streak value:", localStorage.getItem("streak"));
+                    localStorage.setItem("streak_possible", "no")
+
+                    streak_text.innerHTML = `Streak: ${Number(localStorage.getItem("streak"))}`
+                } else {
+                    console.log("Streak is no longer possible!")
+                }
+
+                let checkmark = document.getElementById("checkmark")
+                let suggestionDiv = document.getElementById("suggestions")
+                let button = document.getElementById("button")
+                let countdownheader = document.getElementById("countdown_header")
+                let countdown_live = document.getElementById("countdown1")
+                checkmark.style.display = "flex"
+                victory_box.style.display = "flex"
+                button.style.display = "none"
+                input_field.style.display = "none"
+                suggestionDiv.style.display = "none"
+                countdownheader.style.display = "flex"
+                countdown_live.style.display = "flex"
+
+                //"countdown_header"
+                //"countdown"
+                
+                section.classList.add("active")
+                document.getElementById("overlay").style.display = "block";
+                if (!flawless_victory) {
+                    document.getElementById("guess-count").innerHTML = `You guessed the dinosaur in ${guess_counter} attempts. Well done!`;
+                }
+
+                document.getElementById("characterOfTheDay").innerHTML = `Character of the day: ${randomKey}`;
+                //console.log("it should work")
+            }
+
+            let guide_section = document.getElementById("guide-section")
+            let patch_notes_section = document.getElementById("patch-notes-section")
+            let characters_section = document.getElementById("characters-section")
+            let information_section = document.getElementById("information-section")
+
+            function off() {
+                console.log("off has been triggered")
+                section.classList.remove("active");
+                guide_section.classList.remove("active");
+                patch_notes_section.classList.remove("active");
+                characters_section.classList.remove("active");
+                information_section.classList.remove("active")
+                document.getElementById("overlay").style.display = "none";
+            }
+
+            let highlighted_value = null;
+            document.addEventListener("DOMContentLoaded", function () {
+                localStorage.removeItem("streak_possible"); // Remove only once per day
+                    localStorage.removeItem("savedDivs");
+                    localStorage.removeItem("savedDivs3D")
+                    localStorage.removeItem("banned_list")
+                    localStorage.removeItem("banned_list3D")
+                    localStorage.setItem("lastVisit", today); // Update last visit date
+                    localStorage.removeItem("victory_state")
+                    localStorage.removeItem("victory_state3D")
+                const suggestions = document.getElementById("suggestions");
+
+                document.addEventListener("keydown", function (event) {
+                    if (!suggestions || suggestions.children.length === 0) return;
+
+                    if (selection >= 0) {
+                        suggestions.children[selection].classList.remove("selected");
+                    }
+
+                    if (event.keyCode === 40) { // Down arrow key
+                        if (selection < suggestions.children.length - 1) {
+                            selection++;
+                        }
+                    } else if (event.keyCode === 38) { // Up arrow key
+                        if (selection > 0) {
+                            selection--;
+                        }
+                    }
+
+                    // Apply new selection
+                    if (selection >= 0) {
+                        suggestions.children[selection].classList.add("selected");
+                        highlighted_value = suggestions.children[selection]
+                        console.log(highlighted_value)
+                        console.log("Selection is ", selection)
+                        console.log(suggestions.children)
+                        console.log(suggestions.children[0].innerHTML)
+                        if (suggestions.children) {
+
+                        }
+                    }
+
+                    if (event.key === "Enter") {
+                        guess(highlighted_value.innerHTML)
+                    }
+
+                });
+            });
+
+
+            let input_field = document.getElementById('searchinput');
+
+            input_field.addEventListener("input", function (event) {
+                if (event.key === "Enter") {
+                    console.log("Enter was pressed")
+                    console.log(highlighted_value.innerHTML)
+                } else {
+                    selection = -1
+                }
+            });
+
+            /*function onMidnight() {
+                        alert("It's midnight in Copenhagen! 🎉");
+                        document.body.style.backgroundColor = "black";
+                        document.body.style.color = "white";
+                    }
+            
+                    function onSpecificTime() {
+                        console.log("There are exactly 8 hours, 30 minutes, and 20 seconds left until midnight!");
+                    }
+            */
+
+            function updateCountdown() {
+                const timeZone = "Europe/Copenhagen";
+                const now = new Date();
+
+
+                const options = { timeZone, hour12: false, hour: "2-digit", minute: "2-digit", second: "2-digit" };
+                const formatter = new Intl.DateTimeFormat("en-US", options);
+                const timeParts = formatter.formatToParts(now);
+
+                const hours = parseInt(timeParts.find(p => p.type === "hour").value);
+                const minutes = parseInt(timeParts.find(p => p.type === "minute").value);
+                const seconds = parseInt(timeParts.find(p => p.type === "second").value);
+
+
+                const hoursLeft = 23 - hours;
+                const minutesLeft = 59 - minutes;
+                const secondsLeft = 59 - seconds;
+
+                document.getElementById("countdown").textContent =
+                    `${hoursLeft}h ${minutesLeft}m ${secondsLeft}s`;
+
+                document.getElementById("countdown1").textContent =
+                    `${hoursLeft}h ${minutesLeft}m ${secondsLeft}s`;
+
+                if (hoursLeft === 7 && minutesLeft === 23 && secondsLeft === 35) {
+                    onSpecificTime();
+                }
+            }
+
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
+
+
+
+            let guide_button = document.getElementById("guide")
+
+            guide_button.addEventListener("click", () => {
+
+                console.log("test works")
+                document.getElementById("overlay").style.display = "block";
+                guide_section.classList.add("active")
+            })
+
+
+
+            let patch_button = document.getElementById("patch-notes")
+
+            patch_button.addEventListener("click", () => {
+                console.log("test works")
+                document.getElementById("overlay").style.display = "block";
+                patch_notes_section.classList.add("active")
+            })
+/*
+            let character_button = document.getElementById("characters")
+
+
+            character_button.addEventListener("click", () => {
+                console.log("test works")
+                document.getElementById("overlay").style.display = "block";
+                characters_section.classList.add("active")
+            })
+
+            //let threed_button = document.getElementById("3D")
+            const threed_button = document.getElementById("3D"); // Make sure the button exists
+
+            // Function to update the button text based on the mode
+            function updateButton() {
+                if (hard_mode) {
+                    threed_button.innerHTML = "Hard mode: <br>on ✅";
+                } else {
+                    threed_button.innerHTML = "Hard mode: <br>off ❌";
+                }
+            }
+
+            updateButton(); // Set the correct button text on page load
+
+            threed_button.addEventListener("click", () => {
+                hard_mode = !hard_mode;
+                localStorage.setItem("hard_mode", hard_mode);
+                updateButton();
+                location.reload()
+            });
+
+            let saved = null
+*/
+            window.addEventListener('DOMContentLoaded', () => {
+                if (hard_mode === false) {
+                    saved = localStorage.getItem('savedDivs');
+                } else {
+                    saved = localStorage.getItem("savedDivs3D")
+                }
+
+                //const saved = localStorage.getItem('savedDivs');
+                console.log("reload!");
+                if (saved) {
+                    const container = document.getElementById('answer-container');
+
+                    const divs = JSON.parse(saved);
+                    divs.forEach(html => {
+                        const tempDiv = document.createElement('div');
+                        tempDiv.innerHTML = html;
+                        const square = tempDiv.firstChild;
+
+                        container.appendChild(square);
+                    });
+                }
+
+                const squares = document.querySelectorAll('.square');
+
+                squares.forEach(square => {
+                    square.style.opacity = '1';
+                });
+
+                // let currentday = new Date().toDateString();
+                // localStorage.setItem("today", currentday)
+                if (localStorage.getItem("victory_state") === "true" && hard_mode === false) {
+                    console.log("A past victory has been detected on normal mode");
+                    input_field.style.display = "none";
+
+                    checkmark.style.display = "flex";
+                    victory_box.style.display = "flex";
+                    button.style.display = "none";
+                    input_field.style.display = "none";
+
+                } else if (localStorage.getItem("victory_state3D") === "true" && hard_mode === true) {
+                    console.log("A past victory has been detected on 3D mode");
+                    input_field.style.display = "none";
+
+                    checkmark.style.display = "flex";
+                    victory_box.style.display = "flex";
+                    button.style.display = "none";
+                    input_field.style.display = "none";
+                }
+
+                console.log("Banned list on reload:", banned_list); // Log banned list on page load
+
+            });
+/*
+            let information_icon = document.getElementById("info")
+
+            information_icon.addEventListener("click", () => {
+                document.getElementById("overlay").style.display = "block";
+                information_section.classList.add("active")
+            }) 
+*/
+
+        </script>
+
+    </div>
+    </div>
+
+</body>
+
+</html>

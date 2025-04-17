@@ -256,7 +256,7 @@ mk1 = "Mortal Kombat (1992)"
 
                 console.log(characterDatabase);
 
-            let banned_list = JSON.parse(localStorage.getItem("banned_list")) || []; // Retrieve banned list from local storage or initialize as empty
+            let banned_list = []; // Retrieve banned list from local storage or initialize as empty
 
             let hard_mode = localStorage.getItem("hard_mode") === "true"; // Retrieve and convert to boolean
 
@@ -476,7 +476,7 @@ mk1 = "Mortal Kombat (1992)"
                 }
 
                 if (banned_list.includes(input_value)) {
-                    // console.log("The banned list already has the inputted value")
+                    console.log("The banned list already has the inputted value")
                 }
                 else if (input_value in characterDatabase) {
                     banned_list.push(input_value)

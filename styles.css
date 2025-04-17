@@ -83,10 +83,9 @@
   }
 
   #searchinput {
-    font-size: 14px;
-    padding: 8px;
-    padding-right: 100px;
-  }
+    width: 100%;
+    max-width: 400px;
+}
 
   .menubutton {
     min-width: 90px;
@@ -494,40 +493,53 @@ body {
    
 
 .search-container {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    flex: 1;
-    margin-bottom: 18px;
-    transition: transform 0.2s;
-    z-index: 1000;
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto 18px auto;
 }
 
 .search-container:hover {
     transform: scale(1.05);
     z-index: 1000;
 }
-
+/*
 #rows {
     align-items: center;
     width: 730px;
 }
-
-.square-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: flex-start;
-    width: 100%;
-    margin-bottom: 5px;
+*/
+#rows {
+  width: 100%;
+  max-width: 730px;
+  margin: 0 auto;
 }
 
+.square-container {
+  width: 100%;
+  max-width: 730px;
+  margin: 0 auto 5px auto;
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 5px;
+}
+/*
 .site-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
   }
+*/
+  .site-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 100vw;
+    padding: 0 10px;
+    box-sizing: border-box;
+}
 
   .tooltip {
     position: relative;
@@ -819,4 +831,41 @@ body {
 
 #checkmark {
   display: none;
+}
+
+@media (max-width: 768px) {
+  .site-container {
+      padding: 0 5px;
+  }
+
+  #cards {
+      justify-content: center;
+      gap: 5px;
+  }
+
+  .square-container {
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      padding-bottom: 10px;
+      justify-content: flex-start;
+  }
+
+  .square {
+      min-width: 60px; /* Prevent squares from shrinking too much */
+      flex: 0 0 auto;
+  }
+
+  .search-container {
+      flex-direction: row;
+      flex-wrap: nowrap;
+  }
+
+  #searchinput {
+      flex: 1;
+      min-width: 0;
+  }
+
+  #button {
+      white-space: nowrap;
+  }
 }

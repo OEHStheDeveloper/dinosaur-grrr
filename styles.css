@@ -12,6 +12,113 @@
     text-shadow: 0 0 10px black, 0 0 10px black, 0 0 10px black
 }
 
+@media (max-width: 768px) {
+
+  .title {
+    font-size: 48px;
+  }
+
+  .logo {
+    width: 260px;
+    margin-top: 30px;
+    margin-bottom: 20px;
+  }
+
+  #Checkbox {
+    width: 40px;
+    height: 40px;
+    right: 20px;
+    top: 80px;
+  }
+
+  .answer-container {
+    flex-direction: column;
+    height: auto;
+    align-items: center;
+  }
+
+  .square, .example_square {
+    width: 60px;
+    height: 60px;
+    font-size: 16px;
+  }
+
+  .card {
+    height: 30px;
+    width: 80px;
+    font-size: 16px;
+  }
+
+  #caption {
+    width: 90%;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .modal-box {
+    width: 95%;
+    height: 90%;
+    padding: 20px 10px;
+    font-size: 16px;
+  }
+
+  .modal-box h2 {
+    font-size: 36px;
+  }
+
+  .modal-box h3, .left_text h3 {
+    font-size: 18px;
+  }
+
+  .question {
+    font-size: 28px !important;
+  }
+
+  .answer {
+    font-size: 16px !important;
+  }
+
+  .countdown_section {
+    font-size: 24px;
+  }
+
+  #searchinput {
+    font-size: 14px;
+    padding: 8px;
+    padding-right: 100px;
+  }
+
+  .menubutton {
+    min-width: 90px;
+    min-height: 40px;
+    font-size: 14px;
+  }
+
+  .button-container, .search-container {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  #button {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .tooltip2:before {
+    font-size: 14px;
+    top: 60px;
+  }
+
+  .modal-box-scroll {
+    height: 65%;
+  }
+
+  #victory {
+    font-size: 24px;
+    width: 90%;
+  }
+}
+
 .header {
     display: flex;
     flex-direction: column;
